@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h1 class="text-3xl font-bold mb-8">Latest Posts</h1>
+    <div class="space-y-6">
+        {% for post in posts %}
+            <article class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <h2 class="text-2xl font-semibold mb-2">
+                    <a href="{% url 'post_detail' post.id %}" class="text-gray-800 hover:text-blue-600">
+                        {{ post.title }}
+                    </a>
+                </h2>
+                <p class="text-sm text-gray-500 mb-3">
+                    By {{ post.author.username }} on {{ post.created_at|date:"F d, Y h:i" }}
+                </p>
+                <p class="text-gray-600">{{ post.body|truncatechars:100 }}</p>
+            </article>
+        {% endfor %}
+    </div>
+{% endblock %}

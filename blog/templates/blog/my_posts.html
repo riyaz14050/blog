@@ -1,0 +1,38 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class="flex items-center justify-between mb-8">
+        <h1 class="text-3xl font-bold">My Posts</h1>
+    </div>
+
+    {% if posts %}
+        <div class="space-y-4">
+            {% for post in posts %}
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2">{{ post.title }}</h3>
+                    <p class="text-gray-600 mb-3">{{ post.body|truncatechars:100 }}</p>
+                    <small class="text-gray-400 block mb-3">
+                        Created: {{ post.created_at|date:"M d, Y h:i" }}
+                    </small>
+                    <div class="flex space-x-3">
+                        <a href="{% url 'post_detail' post.id %}" class="px-3 py-1.5 text-sm bg-gray-100 hover:bg-gray-200 rounded">
+                            View
+                        </a>
+                        <a href="{% url 'post_update' post.id %}" class="px-3 py-1.5 text-sm bg-blue-100 hover:bg-blue-200 rounded">
+                            Edit
+                        </a>
+                        <a href="{% url 'post_delete' post.id %}" class="px-3 py-1.5 text-sm bg-red-100 hover:bg-red-200 rounded">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-gray-600">You haven't created any posts yet.</p>
+    {% endif %}
+    
+    <div class="mt-8">
+        <a href="{% url 'home' %}" class="text-blue-600 hover:text-blue-700">← Back to Home</a>
+    </div>
+{% endblock %}

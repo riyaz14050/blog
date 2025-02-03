@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <article class="bg-white p-6 rounded-lg shadow-sm">
+        <h2 class="text-3xl font-bold mb-4">{{ post.title }}</h2>
+        <p class="text-gray-500 mb-6">
+            By {{ post.author.username }} on {{ post.created_at|date:"F d, Y h:i" }}
+        </p>
+        <p class="text-gray-700 leading-relaxed">{{ post.body }}</p>
+        
+        {% if user == post.author %}
+        <div class="flex space-x-3 mt-6">
+            <a href="{% url 'post_update' post.id %}" class="px-3 py-1.5 text-sm bg-blue-100 hover:bg-blue-200 rounded">
+                Edit
+            </a>
+            <a href="{% url 'post_delete' post.id %}" class="px-3 py-1.5 text-sm bg-red-100 hover:bg-red-200 rounded">
+                Delete
+            </a>
+        </div>
+        {% endif %}
+    </article>
+{% endblock %}
