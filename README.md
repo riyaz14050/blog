@@ -10,6 +10,7 @@ This application allows users to create, edit, and delete blog posts. Users can 
 ### 1. Clone Repository
 ```bash
 git clone https://github.com/riyaz14050/blog.git
+cd blog
 ```
 
 ### 2. Create and Activate Virtual Environment
